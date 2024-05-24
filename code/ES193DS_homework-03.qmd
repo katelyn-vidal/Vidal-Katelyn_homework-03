@@ -9,7 +9,7 @@ format: html
 
 Use the information from the `homework-starter-doc.qmd` to do this problem.
 
-# Set up
+# Set up:
 
 ## reading in packages
 
@@ -68,9 +68,9 @@ drought_exp_clean <- drought_exp %>%
   relocate(water_treatment, .after = water) # moving water_treatment column after water
 ```
 
-# Visualizing
+# Visualizing:
 
-## correlations 
+## correlations
 
 ```{r}
 ggpairs(drought_exp_clean, # data frame
@@ -84,11 +84,69 @@ ggpairs(drought_exp_clean, # data frame
   theme(panel.grid = element_blank()) # getting rid of gridlines
 ```
 
+## 0. Null model
+
+```{r}
+model0 <- lm(total_g ~ 1, # formula
+             data = drought_exp_clean) # data frame
+```
+
+## 1. total biomass as a function of SLA, water treatment, and species
+
+```{r}
+# saturated model
+model1 <- lm(total_g ~ sla + water_treatment + species_name,
+             data = drought_exp_clean)
+
+par(mfrow = c(2, 2))
+plot(model1)
+```
+
+## 2. total biomass as a function of SLA and water treatment
+
+```{r}
+model2 <- lm(total_g ~ sla + water_treatment,
+             data = drought_exp_clean)
+
+plot(model2)
+```
+
+## 3. total biomass as a function of SLA and species
+
+```{r}
+model3 <- lm(total_g ~ sla + species_name,
+             data = drought_exp_clean)
+
+plot(model3)
+```
+
+## 4. total biomass as a function of water treatment and species
+
+```{r}
+model4 <- lm(total_g ~ water_treatment + species_name,
+             data = drought_exp_clean)
+
+plot(model4)
+```
+
 #### a. Make a table *or* list of all the models from class and the last one you constructed on your own. Write a caption for your table. (8 points)
 
 **Caption:** table captions typically go above the table. Number the table and provide a title. Describe what is in the table (columns and rows).
 
 **Table:** In your table, each row should be a model with the model number (1, 2, 3, etc.) and the predictors for each model.
+
+```{r}
+# comparing models
+modelsummary::modelsummary( # this function takes a list of models
+  list( 
+    "null" = model0, # "model name" = model object
+    "model 1" = model1,
+    "model 2" = model2,
+    "model 3" = model3,
+    "model 4" = model4),
+  caption = "Table 1.") 
+
+```
 
 ::: callout-note
 #### Double check your work!
@@ -103,6 +161,8 @@ Your answer should be in paragraph form and include:
 -   how you addressed the central question(s) (i.e. to examine the influence of \_\_\_\_, \_\_\_\_, and \_\_\_\_ on \_\_\_\_\_, I...)\
 -   how you chose the final model (i.e. to determine the model that best described \_\_\_\_, I...)\
 -   how you visually determined that your final model conformed to the assumptions of a linear model (i.e. to evaluate linear model assumptions, I...)
+
+**To examine the influence of specific leaf area, water treatment, and species on total biomass, I looked at the structure of the data and I visualized the correlations of a selected group of variables to each other. I also looked at how each variable influenced total biomass through a combination of scatter and jitter plots. To determine the model that best described total biomass, I. To evaluate linear model assumption, I looked at the diagnostics for each scenario.**
 
 #### c. Make a visualization of the model predictions with underlying data for your "best" model. (20 points)
 
@@ -121,9 +181,63 @@ Show and annotate all your code. For full credit:
 Make sure that the only output is the visualization!
 :::
 
+```{r}
+# model predictions for model 1
+model_preds <- ggpredict(model1, 
+                         terms = c("sla",
+                                   "water_treatment", 
+                                   "species_name"))
+```
+
+```{r}
+# creating new data frame of model predictions for plotting
+model_preds_for_plotting <- model_preds %>% 
+  # renaming columns to make this easier to use
+  rename(sla = x, 
+         water_treatment = group,
+         species_name = facet)
+
+# visualization of the model predictions with underlying data for model 1
+ggplot() +
+  # underlying data
+  geom_point(data = drought_exp_clean,
+             aes(x = sla,
+                 y = total_g,
+                 color = water_treatment),
+             alpha = 0.2) +
+  # model prediction 95% CI ribbon
+  geom_ribbon(data = model_preds_for_plotting,
+              aes(x = sla, 
+                  y = predicted,
+                  ymin = conf.low,
+                  ymax = conf.high,
+                  fill = water_treatment),
+              alpha = 0.2) +
+  # model prediction lines
+  geom_line(data = model_preds_for_plotting,
+            aes(x = sla, 
+                y = predicted,
+                color = water_treatment)) +
+  # change color of prediction lines and underlying data
+  scale_color_manual(values = c("mediumorchid4", "darkseagreen4")) +
+  # change color of model prediction 95% CI ribbon
+  scale_fill_manual(values = c("mediumorchid4", "darkseagreen4")) +
+  # cleaner theme
+  theme_classic() +
+  # creating different panels for species
+  facet_wrap(~species_name) +
+  # rename x and y axes
+  labs(x = "Specific leaf area (mm^2/g)",
+       y = "Total biomass (g)") +
+  # remove legend
+  theme(legend.position = "none")
+  
+```
+
 #### d. Write a caption for your visualization. (6 points)
 
-Include a data citation.
+**Figure 1. Predicted values of total biomass**\
+**Data from 'Dryad' package (Valliere J, Zhang J, Sharifi M., Rundel P, 2019). Points represent observations of the specific leaf area (mm\^2/g) and total biomass (g) of species in well watered and drought stressed water treatments, (total n = 70). The lines represents the model prediction of total biomass of species for each water treatment. The ribbon represents the 95% CI around the model predictions. Colors represent water treatment type (purple = well watered, green = drought stressed).**
 
 #### e. Write a 3-4 sentence results section. (10 points)
 
@@ -132,6 +246,9 @@ Your answer should be in paragraph form and address the following points:
 -   what predictors "best" described total mass (include model statistics here)?\
 -   on average, what differences did you find between water treatments?\
 -   on average, what differences did you find between species?
+
+**Results:**\
+**We found a**
 
 ### Problem 2. Affective visualization (24 points)
 
