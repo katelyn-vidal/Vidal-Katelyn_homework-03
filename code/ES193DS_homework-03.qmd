@@ -248,7 +248,7 @@ Your answer should be in paragraph form and address the following points:
 -   on average, what differences did you find between species?
 
 **Results:**\
-**We found a**
+**On average, in well watered water treatments**
 
 ### Problem 2. Affective visualization (24 points)
 
@@ -265,6 +265,8 @@ When thinking of affective visualization, you can expand your ideas of what data
 **Before starting, update your spreadsheet of observations.**
 
 #### a. Describe in words what an affective visualization could look like for your personal data (3-5 sentences). (2 points)
+
+****
 
 #### b. Create a sketch (on paper) of your idea. (2 points)
 
