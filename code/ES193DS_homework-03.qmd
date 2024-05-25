@@ -305,19 +305,19 @@ What are the statistical tests the authors are using to address their main resea
 
 **The statistical tests the authors used to address their main reseach question are t-tests, ANOVA, Mann-Whitney, Kruskal-Wallis, Wilcoxon rank sum, linear model, and Pearson correlation**
 
-Insert the figure or table you described in Homework 2 here.
+![](images/Mann–Whitney_Wilcoxon_Rank-Sum_tests.png){width="406"}
 
 #### b. Visual clarity (10 points)
 
 How clearly did the authors *visually* represent their statistics in figures? For example, are the x- and y-axes in a logical position? Do they show summary statistics (means and SE, for example) and/or model predictions, and if so, do they show the underlying data?
 
-**Answer**
+**The authors clearly labeled their x- and y-axes and labeled each subplot in a larger font to distinguish that the plots are showing different integration components. They also use contrasting colors to represent each integration score that also follows a blue theme, making the statistics visually pleasing and easy to read. They also provide a legend that shows readers what each color represents and what color/score is associated with being high, moderate, and low.**
 
 #### c. Aesthetic clarity (10 points)
 
 How well did the authors handle "visual clutter"? How would you describe the the data:ink ratio?
 
-**Answer**
+**There is minimal "visual clutter" in this figure as there are no grid lines or redundant information that make the plot difficult to read. The bars also clearly represent each score using colors that are easy to distinguish between. However, the title of the subplots seems out of place, being next to the y-axis title. The legend is also clearly labeled and in a logical location that doesn't interfere with the data in the plots. I would describe the data:ink ratio as fairly high because the labels are informative, the percentages are lightened while the titles are in bold, which creates a contrast that helps reduce clutter, there's no clutter in the background, and the bars are clearly separated.**
 
 #### d. Recommendations (can be longer than 4 sentences, 10 points)
 
@@ -325,4 +325,4 @@ What recommendations would you make to make the figure better? What would you ta
 
 **Alternatively**, if they did not represent their statistics in a figure, what kind of figure would you recommend to them? Describe the x- and y-axes, with any geometries and aesthetics (colors, etc.). Provide enough explanation such that someone would be able to create the figure you describe in code. Provide explanations/justifications for the figure you would recommend.
 
-**Answer**
+**To make the figure better, I would label each subdivision of the bars with the percentage it represents. It can be misleading to look at the top of each subdivision to determine the percentage because they don't all start at 0%. So, labeling each subdivision allows people to look at the data without having to do calculations to determine the percentage. I would also put the title of the subplots on top of each of the subplots so people don't confuse the title with the y-axis title or get confused about which title represents the y-axis. I would also organize the plots in a 2x2 format rather than a 1x4 format so that you can easily compare the plots to each other without having to scroll down to look at all the plots together.**
