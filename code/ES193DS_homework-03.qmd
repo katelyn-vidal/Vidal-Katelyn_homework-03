@@ -9,9 +9,9 @@ format: html
 
 Use the information from the `homework-starter-doc.qmd` to do this problem.
 
-# Set up:
+### Set up:
 
-## reading in packages
+#### reading in packages
 
 ```{r}
 #| message: false
@@ -46,7 +46,7 @@ str(drought_exp)
 class(drought_exp)
 ```
 
-## cleaning
+#### cleaning
 
 ```{r}
 # cleaning
@@ -69,9 +69,9 @@ drought_exp_clean <- drought_exp %>%
   relocate(water_treatment, .after = water) # moving water_treatment column after water
 ```
 
-# Visualizing:
+### Visualizing:
 
-## correlations
+#### correlations
 
 ```{r}
 ggpairs(drought_exp_clean, # data frame
@@ -85,14 +85,14 @@ ggpairs(drought_exp_clean, # data frame
   theme(panel.grid = element_blank()) # getting rid of gridlines
 ```
 
-## 0. Null model
+### 0. Null model
 
 ```{r}
 model0 <- lm(total_g ~ 1, # formula
              data = drought_exp_clean) # data frame
 ```
 
-## 1. total biomass as a function of SLA, water treatment, and species
+### 1. total biomass as a function of SLA, water treatment, and species
 
 ```{r}
 # saturated model
@@ -103,7 +103,7 @@ par(mfrow = c(2, 2))
 plot(model1)
 ```
 
-## 2. total biomass as a function of SLA and water treatment
+### 2. total biomass as a function of SLA and water treatment
 
 ```{r}
 model2 <- lm(total_g ~ sla + water_treatment,
@@ -112,7 +112,7 @@ model2 <- lm(total_g ~ sla + water_treatment,
 plot(model2)
 ```
 
-## 3. total biomass as a function of SLA and species
+### 3. total biomass as a function of SLA and species
 
 ```{r}
 model3 <- lm(total_g ~ sla + species_name,
@@ -121,7 +121,7 @@ model3 <- lm(total_g ~ sla + species_name,
 plot(model3)
 ```
 
-## 4. total biomass as a function of water treatment and species
+### 4. total biomass as a function of water treatment and species
 
 ```{r}
 model4 <- lm(total_g ~ water_treatment + species_name,
