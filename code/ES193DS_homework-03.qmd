@@ -144,8 +144,7 @@ modelsummary::modelsummary( # this function takes a list of models
     "model 1" = model1,
     "model 2" = model2,
     "model 3" = model3,
-    "model 4" = model4),
-gof_omit("Num.Obs."|"R2"|"R2 Adj."|"BIC"|"Log.Link"|"RMSE"))
+    "model 4" = model4))
 
 ```
 
@@ -267,7 +266,7 @@ When thinking of affective visualization, you can expand your ideas of what data
 
 #### a. Describe in words what an affective visualization could look like for your personal data (3-5 sentences). (2 points)
 
-****
+**For my personal data, I could crochet a square, with each stitch representing how much I spend for each meal, and use different colors to represent the meal type. I could also have each row represent each week, and use white yarn to fill in the remaining stitches (each row will have about 30 stitches). This will allow me to see which meals I tend to spend the most money on and see which weeks I spent the most and least amount of money.**
 
 #### b. Create a sketch (on paper) of your idea. (2 points)
 
@@ -289,6 +288,8 @@ An artist statement gives the audience context to understand your work. Write 4-
 -   the influences (what did techniques/artists/etc. did you find influential in creating your work?)\
 -   the form of your work (written code, watercolor, oil painting, etc.)\
 -   your process (how did you create your work?)
+
+****
 
 ### Problem 3. Statistical critique (36 points)
 
