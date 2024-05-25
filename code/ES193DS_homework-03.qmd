@@ -35,6 +35,7 @@ library(ggeffects)
 library(gtsummary)
 library(flextable)
 library(modelsummary)
+library(ModelMetrics)
 
 drought_exp <- read_xlsx(path = here("data", 
                                      "Valliere_etal_EcoApps_Data.xlsx"),
@@ -144,7 +145,7 @@ modelsummary::modelsummary( # this function takes a list of models
     "model 2" = model2,
     "model 3" = model3,
     "model 4" = model4),
-  caption = "Table 1.") 
+gof_omit("Num.Obs."|"R2"|"R2 Adj."|"BIC"|"Log.Link"|"RMSE"))
 
 ```
 
