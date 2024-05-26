@@ -136,6 +136,7 @@ plot(model4)
 
 **Table:** In your table, each row should be a model with the model number (1, 2, 3, etc.) and the predictors for each model.
 
+**Table 1. Model prediction table. Rows are predictors and columns are models.**
 ```{r}
 # comparing models
 modelsummary::modelsummary( # this function takes a list of models
@@ -144,9 +145,10 @@ modelsummary::modelsummary( # this function takes a list of models
     "model 1" = model1,
     "model 2" = model2,
     "model 3" = model3,
-    "model 4" = model4))
-
+    "model 4" = model4),
+  gof_map = c("aic"))
 ```
+
 
 ::: callout-note
 #### Double check your work!
