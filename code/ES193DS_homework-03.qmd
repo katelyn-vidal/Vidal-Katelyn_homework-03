@@ -130,6 +130,17 @@ model4 <- lm(total_g ~ water_treatment + species_name,
 plot(model4)
 ```
 
+```{r model-selection}
+model.sel(model0,
+          model1, 
+          model2, 
+          model3,
+          model4)
+```
+```{r}
+summary(model4)
+```
+
 #### a. Make a table *or* list of all the models from class and the last one you constructed on your own. Write a caption for your table. (8 points)
 
 **Caption:** table captions typically go above the table. Number the table and provide a title. Describe what is in the table (columns and rows).
@@ -147,7 +158,7 @@ modelsummary::modelsummary( # this function takes a list of models
     "model 2" = model2,
     "model 3" = model3,
     "model 4" = model4),
-  gof_map = c("aic"))
+  gof_map = c("aic", "delta"))
 ```
 
 ::: callout-note
@@ -164,7 +175,7 @@ Your answer should be in paragraph form and include:
 -   how you chose the final model (i.e. to determine the model that best described \_\_\_\_, I...)\
 -   how you visually determined that your final model conformed to the assumptions of a linear model (i.e. to evaluate linear model assumptions, I...)
 
-**To examine the influence of specific leaf area, water treatment, and species on total biomass, I looked at the structure of the data and I visualized the correlations of a selected group of variables to each other. I also looked at how each variable influenced total biomass through a combination of scatter and jitter plots. To determine the model that best described total biomass, I. To evaluate linear model assumption, I looked at the diagnostics for each scenario.**
+**To examine the influence of specific leaf area, water treatment, and species on total biomass, I used a linear model. My null hypothesis was that these variables do not predict total biomass and my saturated model looks at how all these variables predict total biomass. To determine the model that best described total biomass, I used Multi-Model Inference (MuMIn) package and looked at which model contained the lowest AIC, which was model4. To evaluate linear model assumption, I looked at the diagnostic plots to visually assess for normality and homoscedasticity, and used Cook's distance to determine that there were no outliers influencing my model predictions.**
 
 #### c. Make a visualization of the model predictions with underlying data for your "best" model. (20 points)
 
@@ -250,7 +261,7 @@ Your answer should be in paragraph form and address the following points:
 -   on average, what differences did you find between species?
 
 **Results:**\
-**On average, in well watered water treatments**
+**We found that water treatments and species significantly predicted total biomass, but not SLA (Table 1). Across species and SLA on average, plants in well watered treatment are 0.12 ± 0.019 g greater than plants in drought stressed treatment. Across water treatments and SLA on average, Lotus scoparius plants were -0.23 ± 0.032 g less than Encelia californica. F(7, 62) = 27.08, p < 0.001, ⍺ = 0.05, adjusted R2 = 0.73**
 
 ### Problem 2. Affective visualization (24 points)
 
