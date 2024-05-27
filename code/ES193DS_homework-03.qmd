@@ -137,6 +137,7 @@ plot(model4)
 **Table:** In your table, each row should be a model with the model number (1, 2, 3, etc.) and the predictors for each model.
 
 **Table 1. Model prediction table. Rows are predictors and columns are models.**
+
 ```{r}
 # comparing models
 modelsummary::modelsummary( # this function takes a list of models
@@ -148,7 +149,6 @@ modelsummary::modelsummary( # this function takes a list of models
     "model 4" = model4),
   gof_map = c("aic"))
 ```
-
 
 ::: callout-note
 #### Double check your work!
@@ -268,11 +268,11 @@ When thinking of affective visualization, you can expand your ideas of what data
 
 #### a. Describe in words what an affective visualization could look like for your personal data (3-5 sentences). (2 points)
 
-**For my personal data, I could crochet a square, with each stitch representing how much I spend for each meal, and use different colors to represent the meal type. I could also have each row represent each week, and use white yarn to fill in the remaining stitches (each row will have about 40 stitches). This will allow me to see which meals I tend to spend the most money on and see which weeks I spent the most and least amount of money. I could also separate each month by using a contrasting yarn color.**
+**For my personal data, I could crochet a square, with each stitch representing how much I spend for each meal, and use different colors to represent the meal type. I could also have each row represent each week, and use white yarn to fill in the remaining stitches and separate each purchase(each row will have 50 stitches). This will allow me to see which meals I tend to spend the most money on and see which weeks I spent the most and least amount of money. I could also separate each month by using a contrasting yarn color.**
 
 #### b. Create a sketch (on paper) of your idea. (2 points)
 
-![](images/IMG_1970.jpeg)
+![](images/IMG_2013.jpeg){width="428"}
 
 #### c. Make a draft of your visualization. (12 points)
 
@@ -282,7 +282,7 @@ If you are making your visualization in R, show the annotated code and the outpu
 
 If you are making your visualization outside of R, include a photo of your visualization in your submission.
 
-**INSERT PHOTO**
+![](images/IMG_2012.jpeg)
 
 #### d. Write an artist statement. (8 points)
 
@@ -293,7 +293,7 @@ An artist statement gives the audience context to understand your work. Write 4-
 -   the form of your work (written code, watercolor, oil painting, etc.)\
 -   your process (how did you create your work?)
 
-**This crochet piece represents my weekly and monthly spending habits on food with each stitch representing the cost of a meal (USD, rounded up) and each row representing each week, separated by a row of black stitches to represent different months. The colors represent the type of meal (blue = lunch, light brown = snack, dark brown = dinner) and the white yarn is used to fill up the remaining space in the row (rows contain 40 stitches each). This piece is influenced by Lorraine Woodruff-Long's warming strips quilt representing global temperature change, which inspired me to show how my spending habits on food changed over time. I created this piece by first calculating what my max cost of food was in each week to determine how many stitches to include in each row. I then I started crocheting, adding in each color, filler, and divider until I reached the end of my observations.**
+**This crochet piece represents my weekly and monthly spending habits on food with each stitch representing the cost of a meal (USD, rounded up to nearest whole number) and each row representing each week, with a series of 5 of black stitches to represent the start of a new month. The colors represent the type of meal (blue = lunch, light brown = snack, dark brown = dinner) and the white yarn is used to fill up the remaining space in the row (rows contain 50 stitches each) and separate each purchase. This piece is influenced by Lorraine Woodruff-Long's warming strips quilt representing global temperature change, which inspired me to show how my spending habits on food changed over time. I created this piece by first calculating what my max cost of food was in each week to determine how many stitches to include in each row. I then I started crocheting, adding in each color, filler, and divider until I reached the end of my observations.**
 
 ### Problem 3. Statistical critique (36 points)
 
