@@ -11,11 +11,10 @@ Use the information from the `homework-starter-doc.qmd` to do this problem.
 
 ### Set up:
 
-#### reading in packages
-
 ```{r}
 #| message: false
 
+#reading in packages
 # general use
 library(tidyverse)
 library(readxl)
@@ -65,6 +64,74 @@ drought_exp_clean <- drought_exp %>%
     water == "DS" ~ "Drought stressed"
   )) %>% 
   relocate(water_treatment, .after = water) # moving water_treatment column after water
+```
+
+```{r correlations-with-ggpairs}
+# visualizing correlations with ggpairs
+#| fig-height: 8
+#| fig-width: 8
+
+# data frame
+ggpairs(drought_exp_clean, 
+        # columns to visualize
+        columns = c("leaf_dry_weight_g", 
+                    "sla", 
+                    "shoot_g", 
+                    "root_g", 
+                    "total_g"), 
+        # calculating Pearson correlation coefficient
+        upper = list(method = "pearson")) + 
+  # cleaner theme
+  theme_bw() + 
+  # getting rid of gridlines
+  theme(panel.grid = element_blank()) 
+```
+
+```{r mass-as-a-function-of-species}
+# visualizing mass as a function of species
+#| fig-width: 10
+#| fig-height: 5
+
+# data frame
+ggplot(data = drought_exp_clean, 
+       # reordering x-axis
+       aes(x = reorder(species_name,
+                       # in reverse order of mean total mass
+                       -total_g,
+                       # calculating mean to reorder
+                       fun = mean),
+           # y-axis
+           y = total_g)) +
+  # narrow jitter
+  geom_jitter(width = 0.1,
+              # not jittering points up and down
+              height = 0) 
+```
+
+```{r mass-as-a-function-of-water-treatment}
+# visualizing mass a a function of water treatment
+# data frame
+ggplot(data = drought_exp_clean, 
+       # x-axis
+       aes(x = water_treatment,
+           # y-axis
+           y = total_g)) + 
+  # narrow jitter
+  geom_jitter(width = 0.1, 
+              # not jittering points up and down
+              height = 0) 
+```
+
+```{r mass-as-a-function-of-sla}
+# visualizing mass as a function of sla
+# data frame
+ggplot(data = drought_exp_clean,
+       # x-axis
+       aes(x = sla, 
+           # y-axis
+           y = total_g)) + 
+  # scatterplot
+  geom_point() 
 ```
 
 ```{r}
@@ -221,7 +288,7 @@ ggplot() +
                  color = water_treatment),
              alpha = 0.2,
              width = 0.2) +
-  # model prediction 95% CI 
+  # model predictions with 95% CI 
   geom_pointrange(data = model_preds_for_plotting,
               aes(x = water_treatment, 
                   y = predicted,
@@ -230,7 +297,7 @@ ggplot() +
                   color = water_treatment),
               alpha = 0.9,
               size = 0.3) +
-  # change color of model prediction 95% CI and underlying data
+  # change color of model predictions with 95% CI and underlying data
   scale_color_manual(values = c("Well watered" = "orchid", "Drought stressed" = "darkgreen")) +
   # cleaner theme
   theme_classic() +
