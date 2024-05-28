@@ -46,8 +46,6 @@ str(drought_exp)
 class(drought_exp)
 ```
 
-#### cleaning
-
 ```{r}
 # cleaning
 drought_exp_clean <- drought_exp %>% 
@@ -69,73 +67,64 @@ drought_exp_clean <- drought_exp %>%
   relocate(water_treatment, .after = water) # moving water_treatment column after water
 ```
 
-### Visualizing:
-
-#### correlations
-
 ```{r}
-ggpairs(drought_exp_clean, # data frame
-        columns = c("leaf_dry_weight_g", # columns to visualize
-                    "sla", 
-                    "shoot_g", 
-                    "root_g", 
-                    "total_g"), 
-        upper = list(method = "pearson")) + # calculating Pearson correlation coefficient
-  theme_bw() + # cleaner theme
-  theme(panel.grid = element_blank()) # getting rid of gridlines
+# null model
+model0 <- lm(total_g ~ 1, 
+             data = drought_exp_clean) 
 ```
 
-### 0. Null model
-
 ```{r}
-model0 <- lm(total_g ~ 1, # formula
-             data = drought_exp_clean) # data frame
-```
-
-### 1. total biomass as a function of SLA, water treatment, and species
-
-```{r}
-# saturated model
+# model 1, saturated model, total biomass as a function of SLA, water treatment, and species
 model1 <- lm(total_g ~ sla + water_treatment + species_name,
              data = drought_exp_clean)
 
 par(mfrow = c(2, 2))
+# show model 1
 plot(model1)
 ```
 
-### 2. total biomass as a function of SLA and water treatment
-
 ```{r}
+# model 2, total biomass as a function of SLA and water treatment
 model2 <- lm(total_g ~ sla + water_treatment,
              data = drought_exp_clean)
 
+par(mfrow = c(2, 2))
+# show model 2 diagnostics
 plot(model2)
 ```
 
-### 3. total biomass as a function of SLA and species
-
 ```{r}
+# model 3, total biomass as a function of SLA and species
 model3 <- lm(total_g ~ sla + species_name,
              data = drought_exp_clean)
 
+par(mfrow = c(2, 2))
+# show model 3 diagnostics
 plot(model3)
 ```
 
-### 4. total biomass as a function of water treatment and species
-
 ```{r}
+# model 4, total biomass as a function of water treatment and species
 model4 <- lm(total_g ~ water_treatment + species_name,
              data = drought_exp_clean)
 
+par(mfrow = c(2, 2))
+# show model 4 diagnostics
 plot(model4)
 ```
 
 ```{r model-selection}
+# model selection
 model.sel(model0,
           model1, 
           model2, 
           model3,
           model4)
+```
+
+```{r model-summary}
+# summary of model 4
+summary(model4)
 ```
 
 #### a. Make a table *or* list of all the models from class and the last one you constructed on your own. Write a caption for your table. (8 points)
@@ -144,25 +133,45 @@ model.sel(model0,
 
 **Table:** In your table, each row should be a model with the model number (1, 2, 3, etc.) and the predictors for each model.
 
-**Table 1. Model prediction table. Rows are predictors and columns are models.**
-
 ```{r}
-# comparing models
-modelsummary::modelsummary( # this function takes a list of models
-  list( 
-    "null" = model0, # "model name" = model object
-    "model 1" = model1,
-    "model 2" = model2,
-    "model 3" = model3,
-    "model 4" = model4),
-  gof_map = c("aic", "delta"))
+# making a matrix called 'all_models'
+all_models <- tribble(
+  # specify column titles
+  ~model, ~intercept, ~sla, ~well_watered, ~Encelia_californica, ~Eschscholzia_californica, ~Grindelia_camporum, ~Nasella_pulchra, ~Penstemon_centranthifolius, ~Salvia_leucophylla, ~AIC, ~deltaAIC,
+  # specify row names and values
+  "null", 0.279, NA, NA, NA, NA, NA, NA, NA, NA, -75.2,81.22,
+  "model 1", 0.080, 0, 0.122, 0.238, 0.234, 0.330, 0.241, 0.061, 0.117, -157.5, 2.44,
+  "model 2", 0.047, 0.001, 0.090, NA, NA, NA, NA, NA, NA, -96.4, 60.37,
+  "model 3", -0.033	, 0.001, NA, 0.115, 0.222, 0.226, 0.168, -0.006, 0.139, -127.1, 32.12,
+  "model 4", 0.055, NA, 0.0117, 0.218, 0.232, 0.313, 0.229, 0.050, 0.120, -159.2, 0
+)
+
+#display matrix  
+all_models
+```
+```{r}
+# turning everything into a flextable
+  flextable(all_models) %>% 
+  # changing the column names to look nicer
+  set_header_labels(well_watered = "Well watered",
+                    Encelia_californica = " Encelia californica",
+                    Eschscholzia_californica = "Eschscholzia californica",
+                    Grindelia_camporum = "Grindelia camporum,",
+                    Nasella_pulchra = "Nasella pulchra",
+                    Penstemon_centranthifolius = "Penstemon centranthifolius",
+                    Salvia_leucophylla = "Salvia leucophylla",
+                    deltaAIC = "delta AIC") %>% 
+  # adding headers
+  add_header_row(colwidths = c(2, 1, 1, 3, 3, 2),
+                 values = c("", "", "Water treatment","Species", "", "")) %>%
+  # adding caption
+  set_caption(caption = as_paragraph(colorize("Table 1. Rows are models and columns show the intercept, predictors (water treatment and species), AIC, and ∆AIC", color = "black"))) %>% 
+  # changing theme and width of table
+  theme_vanilla() %>% 
+  width(width = 10)
+ 
 ```
 
-::: callout-note
-#### Double check your work!
-
-There should be 5 models total (null model + 4 models with predictors).
-:::
 
 #### b. Write a 5-6 sentence "statistical methods" section. (8 points)
 
@@ -187,15 +196,10 @@ Show and annotate all your code. For full credit:
 -   remove the legend\
 -   finalize the plot
 
-::: callout-note
-Make sure that the only output is the visualization!
-:::
-
 ```{r}
-# model predictions for model 1
-model_preds <- ggpredict(model1, 
-                         terms = c("sla",
-                                   "water_treatment", 
+# model predictions for model 4
+model_preds <- ggpredict(model4, 
+                         terms = c("water_treatment", 
                                    "species_name"))
 ```
 
@@ -203,41 +207,37 @@ model_preds <- ggpredict(model1,
 # creating new data frame of model predictions for plotting
 model_preds_for_plotting <- model_preds %>% 
   # renaming columns to make this easier to use
-  rename(sla = x, 
-         water_treatment = group,
-         species_name = facet)
+  rename(water_treatment = x,
+         species_name = group)
+```
 
-# visualization of the model predictions with underlying data for model 1
+```{r}
+# visualization of the model predictions with underlying data for model 4
 ggplot() +
   # underlying data
-  geom_point(data = drought_exp_clean,
-             aes(x = sla,
+  geom_jitter(data = drought_exp_clean,
+             aes(x = water_treatment,
                  y = total_g,
                  color = water_treatment),
-             alpha = 0.2) +
-  # model prediction 95% CI ribbon
-  geom_ribbon(data = model_preds_for_plotting,
-              aes(x = sla, 
+             alpha = 0.2,
+             width = 0.2) +
+  # model prediction 95% CI 
+  geom_pointrange(data = model_preds_for_plotting,
+              aes(x = water_treatment, 
                   y = predicted,
                   ymin = conf.low,
                   ymax = conf.high,
-                  fill = water_treatment),
-              alpha = 0.2) +
-  # model prediction lines
-  geom_line(data = model_preds_for_plotting,
-            aes(x = sla, 
-                y = predicted,
-                color = water_treatment)) +
-  # change color of prediction lines and underlying data
-  scale_color_manual(values = c("mediumorchid4", "darkseagreen4")) +
-  # change color of model prediction 95% CI ribbon
-  scale_fill_manual(values = c("mediumorchid4", "darkseagreen4")) +
+                  color = water_treatment),
+              alpha = 0.9,
+              size = 0.3) +
+  # change color of model prediction 95% CI and underlying data
+  scale_color_manual(values = c("Well watered" = "orchid", "Drought stressed" = "darkgreen")) +
   # cleaner theme
   theme_classic() +
   # creating different panels for species
   facet_wrap(~species_name) +
   # rename x and y axes
-  labs(x = "Specific leaf area (mm^2/g)",
+  labs(x = "Water treatment",
        y = "Total biomass (g)") +
   # remove legend
   theme(legend.position = "none")
@@ -247,7 +247,7 @@ ggplot() +
 #### d. Write a caption for your visualization. (6 points)
 
 **Figure 1. Predicted values of total biomass**\
-**Data from 'Dryad' package (Valliere J, Zhang J, Sharifi M., Rundel P, 2019). Points represent observations of the specific leaf area (mm\^2/g) and total biomass (g) of species in well watered and drought stressed water treatments, (total n = 70). The lines represents the model prediction of total biomass of species for each water treatment. The ribbon represents the 95% CI around the model predictions. Colors represent water treatment type (purple = well watered, green = drought stressed).**
+**Data from 'Dryad' package (Valliere J, Zhang J, Sharifi M., Rundel P, 2019). Points represent observations of the total biomass (g) of species in well watered and drought stressed water treatments, (total n = 70). The lines represents the model prediction of total biomass of species for each water treatment. The ribbon represents the 95% CI around the model predictions. Colors represent water treatment type (purple = well watered, green = drought stressed).**
 
 #### e. Write a 3-4 sentence results section. (10 points)
 
@@ -258,7 +258,7 @@ Your answer should be in paragraph form and address the following points:
 -   on average, what differences did you find between species?
 
 **Results:**\
-**We found that water treatments and species significantly predicted total biomass, but not SLA (Table 1). Across species on average, plants in well watered treatment are 0.12 ± 0.017 g greater than plants in drought stressed treatment. Across water treatments on average, Eschscholzia californica plants are 0.23 ± 0.032 g more than Acmispon glaber (F(7, 62) = 27.08, p < 0.001, ⍺ = 0.05, adjusted R2 = 0.73).**
+**We found that water treatments and species significantly predicted total biomass, but not SLA (Table 1). Across species on average, plants in well watered treatment are 0.12 ± 0.017 g greater than plants in drought stressed treatment. Across water treatments on average, Eschscholzia californica plants are 0.23 ± 0.032 g more than Acmispon glaber (F(7, 62) = 27.08, p \< 0.001, ⍺ = 0.05, adjusted R2 = 0.73).**
 
 ### Problem 2. Affective visualization (24 points)
 
