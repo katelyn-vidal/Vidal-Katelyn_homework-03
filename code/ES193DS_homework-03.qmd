@@ -257,12 +257,8 @@ Your answer should be in paragraph form and address the following points:
 -   on average, what differences did you find between water treatments?\
 -   on average, what differences did you find between species?
 
-```{r}
-summary(model4)
-```
-
 **Results:**\
-**We found that water treatments and species significantly predicted total biomass, but not SLA (Table 1). Across species and SLA on average, plants in well watered treatment are 0.12 ± 0.017 g greater than plants in drought stressed treatment. Across water treatments and SLA on average, Eschscholzia californica plants were -0.23 ± 0.032 g less than Acmispon glaber (F(7, 62) = 27.08, p < 0.001, ⍺ = 0.05, adjusted R2 = 0.73).**
+**We found that water treatments and species significantly predicted total biomass, but not SLA (Table 1). Across species on average, plants in well watered treatment are 0.12 ± 0.017 g greater than plants in drought stressed treatment. Across water treatments on average, Eschscholzia californica plants are 0.23 ± 0.032 g more than Acmispon glaber (F(7, 62) = 27.08, p < 0.001, ⍺ = 0.05, adjusted R2 = 0.73).**
 
 ### Problem 2. Affective visualization (24 points)
 
