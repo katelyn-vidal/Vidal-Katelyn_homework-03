@@ -2,7 +2,7 @@
 title: "ES 193DS homework 3"
 date: 2024-06-02
 author: "Katelyn Vidal"
-format: docx
+format: html
 ---
 
 ### Set up:
