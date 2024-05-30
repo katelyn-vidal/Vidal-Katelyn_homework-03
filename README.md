@@ -34,4 +34,4 @@
 
 # Rendered output
 
-The rendered .html for this repo is [here](file:///Users/katelynvidal/Desktop/ES193DS/ENVS-193DS/github/Vidal-Katelyn_homework-03/code/ES193DS_homework-03.html).
+The rendered .html for this repo is [here](https://katelyn-vidal.github.io/Vidal-Katelyn_homework-03/code/ES193DS_homework-03.html).
