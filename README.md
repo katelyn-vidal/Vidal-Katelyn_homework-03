@@ -33,4 +33,4 @@
 
 # Rendered output
 
-The rendered .html for this repo is [here](https://an-bui.github.io/ENVS193DS_workshop-08/code/homework-starter-doc_KEY.html).
+The rendered .html for this repo is [here](file:///Users/katelynvidal/Desktop/ES193DS/ENVS-193DS/github/Vidal-Katelyn_homework-03/code/ES193DS_homework-03.html).
