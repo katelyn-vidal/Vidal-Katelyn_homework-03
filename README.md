@@ -29,6 +29,7 @@
     -   `ES193DS_homework-03_files`: files associated with `ES193DS_homework-03.html`
         -   `figure-html`: all figure outputs
         -   `libs`: accessory files for HTML
+    - `ES193DS_homework-03.docx`: rendered doc of `ES193DS_homework-03.qmd`
     -   `images`: images for problems 2b, 2c, and 3a
 -   `data`: Valliere_etal_EcoApps_Data.xlsx
 
