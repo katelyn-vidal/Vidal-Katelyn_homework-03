@@ -14,6 +14,7 @@
 
 -   `ENVS193DS_workshop-08.Rproj`: project file
 -   `README.md`: broad overview
+-   `README.html`: rendered html of `README.md`
 -   `code`: templates/keys, rendered HTMLs, docs, and images
     -   `homework-starter-doc_KEY.html`: rendered HTML of `homework-starter-doc_KEY.qmd`
     -   `homework-starter-doc_KEY.qmd`: key code file
@@ -23,12 +24,12 @@
     -   `homework-starter-doc_TEMPLATE.qmd`: template code file
     -   `homework-starter-doc_TEMPLATE_4PM.qmd`: template code file for 4pm section
     -   `homework-starter-doc_TEMPLATE_5PM.qmd`: template code file for 5pm section
-    -   `ES193DS_homework-03.html`: rendered HTML of homework 3 code
+    -   `ES193DS_homework-03.html`: rendered HTML of `ES193DS_homework-03.qmd`
     -   `ES193DS_homework-03.qmd`: homework 3 code file
     -   `ES193DS_homework-03_files`: files associated with `ES193DS_homework-03.html`
         -   `figure-html`: all figure outputs
         -   `libs`: accessory files for HTML
-    - `images`: images for problems 2b, 2c, and 3a
+    -   `images`: images for problems 2b, 2c, and 3a
 -   `data`: Valliere_etal_EcoApps_Data.xlsx
 
 # Rendered output
