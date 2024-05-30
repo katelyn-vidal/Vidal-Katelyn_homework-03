@@ -5,10 +5,6 @@ author: "Katelyn Vidal"
 format: html
 ---
 
-### Problem 1. Multiple linear regression: model selection and construction (52 points)
-
-Use the information from the `homework-starter-doc.qmd` to do this problem.
-
 ### Set up:
 
 ```{r}
@@ -193,6 +189,10 @@ model.sel(model0,
 # summary of model 4
 summary(model4)
 ```
+
+### Problem 1. Multiple linear regression: model selection and construction (52 points)
+
+Use the information from the `homework-starter-doc.qmd` to do this problem.
 
 #### a. Make a table *or* list of all the models from class and the last one you constructed on your own. Write a caption for your table. (8 points)
 
