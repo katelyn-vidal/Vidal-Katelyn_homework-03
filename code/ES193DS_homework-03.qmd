@@ -2,7 +2,7 @@
 title: "ES 193DS homework 3"
 date: 2024-06-02
 author: "Katelyn Vidal"
-format: html
+format: docx
 ---
 
 gituhub repository: <https://katelyn-vidal.github.io/Vidal-Katelyn_homework-03/>
