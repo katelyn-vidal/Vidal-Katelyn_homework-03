@@ -5,6 +5,8 @@ author: "Katelyn Vidal"
 format: html
 ---
 
+gituhub repository: <https://katelyn-vidal.github.io/Vidal-Katelyn_homework-03/>
+
 ### Set up:
 
 ```{r}
@@ -207,6 +209,20 @@ Use the information from the `homework-starter-doc.qmd` to do this problem.
 **Table:** In your table, each row should be a model with the model number (1, 2, 3, etc.) and the predictors for each model.
 
 ```{r}
+# comparing models
+modelsummary::modelsummary( # this function takes a list of models
+  list( 
+    "null" = model0, # "model name" = model object
+    "model 1" = model1,
+    "model 2" = model2,
+    "model 3" = model3,
+    "model 4" = model4
+  )
+) 
+
+```
+
+```{r}
 # making a matrix called 'all_models'
 all_models <- tribble(
   # specify column titles
@@ -222,6 +238,7 @@ all_models <- tribble(
 # display matrix  
 all_models
 ```
+
 ```{r}
 # turning everything into a flextable
   flextable(all_models) %>% 
@@ -244,7 +261,6 @@ all_models
   width(width = 10)
  
 ```
-
 
 #### b. Write a 5-6 sentence "statistical methods" section. (8 points)
 
@@ -336,7 +352,7 @@ Your answer should be in paragraph form and address the following points:
 -   on average, what differences did you find between species?
 
 **Results:**\
-**We found that water treatments and species significantly predicted total biomass, but not SLA (Table 1). Across species on average, plants in well watered treatment are 0.12 ± 0.017 g greater than plants in drought stressed treatment. Across water treatments on average, Eschscholzia californica plants are 0.23 ± 0.032 g more than Acmispon glaber (F(7, 62) = 27.08, p < 0.001, ⍺ = 0.05, adjusted R2 = 0.73).**
+**We found that water treatments and species significantly predicted total biomass, but not SLA (Table 1). Across species on average, plants in well watered treatment are 0.12 ± 0.017 g greater than plants in drought stressed treatment. Across water treatments on average, Eschscholzia californica plants are 0.23 ± 0.032 g more than Acmispon glaber (F(7, 62) = 27.08, p \< 0.001, ⍺ = 0.05, adjusted R2 = 0.73).**
 
 ### Problem 2. Affective visualization (24 points)
 
@@ -391,8 +407,7 @@ At this point, you have seen and created a lot of figures for this class. Revisi
 
 What are the statistical tests the authors are using to address their main research question?
 
-**The authors used Mann–Whitney Wilcoxon Rank-Sum tests to address their main research question: "How well stakeholders are included in and protected from groundwater depletion in Sustainability Plans under California's Sustainable Groundwater Management?" **
-![](images/Mann–Whitney_Wilcoxon_Rank-Sum_tests.png){width="406"}
+**The authors used Mann–Whitney Wilcoxon Rank-Sum tests to address their main research question: "How well stakeholders are included in and protected from groundwater depletion in Sustainability Plans under California's Sustainable Groundwater Management?"** ![](images/Mann–Whitney_Wilcoxon_Rank-Sum_tests.png){width="406"}
 
 #### b. Visual clarity (10 points)
 
