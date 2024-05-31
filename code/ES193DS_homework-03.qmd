@@ -5,7 +5,7 @@ author: "Katelyn Vidal"
 format: docx
 ---
 
-gituhub repository: <https://katelyn-vidal.github.io/Vidal-Katelyn_homework-03/>
+gituhub repository: <https://github.com/katelyn-vidal/Vidal-Katelyn_homework-03.git>
 
 ### Set up:
 
